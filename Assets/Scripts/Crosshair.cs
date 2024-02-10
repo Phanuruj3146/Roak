@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 
 public class Crosshair : MonoBehaviour
@@ -8,13 +10,21 @@ public class Crosshair : MonoBehaviour
     public bool canPlace = false;
     public Camera xrCamera;
     public ARRaycastManager arRaycastMng;
-    private Pose placementPose;
-    public GameObject target;
-    public GameObject objectToSpawn;
+    public GameObject monsterTarget;
+    public GameObject playerTarget;
+    public GameObject monster;
+    public GameObject player;
+    public Button spawnBtnUI;
+    public TextMeshProUGUI spawnBtnUIText;
 
+    private Pose placementPose;
+    private bool monsterExist = false;
+    private bool playerExist = false;
     // Start is called before the first frame update
     void Start()
     {
+        Button spawnBtn = spawnBtnUI.GetComponent<Button>();
+        spawnBtn.onClick.AddListener(InstantiateObject);
 
     }
 
@@ -24,10 +34,16 @@ public class Crosshair : MonoBehaviour
         UpdatePlacementPose();
         UpdateTargetIndicator();
 
-        if (canPlace && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            InstantiateObject();
-        }
+        //if (canPlace && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        //{
+        //    if (monsterAlive == false)
+        //    {
+        //        InstantiateObject(monster);
+        //    } else if (playerAlive == false)
+        //    {
+        //        InstantiateObject(player);
+        //    }
+        //}
 
         if (canPlace && Input.GetKeyUp(KeyCode.Space))
         {
@@ -37,7 +53,30 @@ public class Crosshair : MonoBehaviour
 
     void InstantiateObject()
     {
-        Instantiate(objectToSpawn, placementPose.position, placementPose.rotation);
+        string type = "";
+        if (monsterExist == false)
+        {
+            Instantiate(monster, placementPose.position, placementPose.rotation);
+            type = "Monster";
+            spawnBtnUIText.text = "Spawn Player";
+
+        }
+        else if (playerExist == false)
+        {
+            Instantiate(player, placementPose.position, placementPose.rotation);
+            type = "Player";
+            spawnBtnUI.gameObject.SetActive(false);
+        }
+        if (type == "Monster")
+        {
+            monsterExist = true;
+            monsterTarget.SetActive(false);
+        }
+        else if (type == "Player")
+        {
+            playerExist = true;
+            playerTarget.SetActive(false);
+        }
     }
 
     void UpdatePlacementPose()
@@ -63,12 +102,29 @@ public class Crosshair : MonoBehaviour
     {
         if (canPlace)
         {
-            target.SetActive(true);
-            target.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+            if (monsterExist == false)
+            {
+                monsterTarget.SetActive(true);
+                monsterTarget.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+            }
+            else if (playerExist == false)
+            {
+                playerTarget.SetActive(true);
+                playerTarget.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+            }
         }
         else
         {
-            target.SetActive(false);
+            if (monsterExist == false)
+            {
+                monsterTarget.SetActive(false);
+                monsterTarget.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+            }
+            else if (playerExist == false)
+            {
+                playerTarget.SetActive(false);
+                playerTarget.transform.SetPositionAndRotation(placementPose.position, placementPose.rotation);
+            }
         }
     }
 }
