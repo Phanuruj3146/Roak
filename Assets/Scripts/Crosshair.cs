@@ -18,6 +18,7 @@ public class Crosshair : MonoBehaviour
     public TextMeshProUGUI spawnBtnUIText;
     public GameObject movementJoystick;
     public GameObject updownJoystick;
+    public GameObject gameManager;
 
     private Pose placementPose;
     private bool monsterExist = false;
@@ -67,12 +68,17 @@ public class Crosshair : MonoBehaviour
         }
         else if (playerExist == false)
         {
+            
             Instantiate(player, placementPose.position, placementPose.rotation);
             type = "Player";
             spawnBtnUI.gameObject.SetActive(false);
+            // Start game
             Debug.Log("time to move!");
             movementJoystick.SetActive(true);
             updownJoystick.SetActive(true);
+
+            gameManager.GetComponent<GameManager>().StartGame();
+
         }
         if (type == "Monster")
         {
