@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     public Rigidbody rigid;
     public CharInputSystem actionMap;
     [SerializeField] private Vector2 directionValue;
+    [SerializeField] private float updown;
     // [SerializeField] private float forcePower = 1f;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +25,9 @@ public class Player : MonoBehaviour
     void Update()
     {
         directionValue = actionMap.Player.Movement.ReadValue<Vector2>();
-        Debug.Log(directionValue[0]);
+        updown = actionMap.Player.UpDown.ReadValue<float>();
+
+        Debug.Log(updown);
         // Make player focus enemy
         if (GameObject.FindGameObjectWithTag("Monster") != null)
         {
@@ -39,7 +43,7 @@ public class Player : MonoBehaviour
 
     void ApplyForce()
     {
-        Vector3 applyingForce = new Vector3 (directionValue[0] * spd, 0f, directionValue[1] * spd);
+        Vector3 applyingForce = new Vector3 (directionValue[0] * spd, updown *  spd, directionValue[1] * spd);
         rigid.AddForce(applyingForce * Time.deltaTime, ForceMode.Impulse);
     }
 }
