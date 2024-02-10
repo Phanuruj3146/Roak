@@ -56,7 +56,8 @@ public class Crosshair : MonoBehaviour
         string type = "";
         if (monsterExist == false)
         {
-            Instantiate(monster, placementPose.position, placementPose.rotation);
+
+            Instantiate(monster, placementPose.position, Quaternion.Euler(-90,0,0));
             type = "Monster";
             spawnBtnUIText.text = "Spawn Player";
 

@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
     public GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,11 @@ public class Monster : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Player") != null)
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            this.transform.LookAt(player.transform);
+            Vector3 look = transform.InverseTransformPoint(player.transform.position);
+            float angle = Mathf.Atan2(look.y,look.x) * Mathf.Rad2Deg - 270;
+            this.transform.Rotate(0,0,angle);
+            //this.transform.LookAt(new Vector3 (player.transform.position.x,player.transform.position.y,player.transform.position.z));
+
         }
     }
 
