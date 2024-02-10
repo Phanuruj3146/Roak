@@ -8,18 +8,19 @@ using Core;
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI timeTxt;
+    public TextMeshProUGUI scoreTxt;
     public float timeRemaining = 30;
     public GameState gameState;
+
 
     private string outputText;
     // Start is called before the first frame update
     void Start()
     {
-        
         float min = Mathf.FloorToInt(timeRemaining / 60);
         float sec = Mathf.FloorToInt(timeRemaining % 60);
         outputText = "Time left: " + string.Format("{0:00}:{1:00}", min, sec);
-        timeTxt.text = "Time left:" + outputText;
+        timeTxt.text = outputText;
     }
 
     // Update is called once per frame

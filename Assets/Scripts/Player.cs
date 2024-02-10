@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public int atk = 10;
     public float spd = 10;
     public int parryGauge = 50;
+    public int money = 0;
     public GameObject monster;
     public Rigidbody rigid;
     public CharInputSystem actionMap;
@@ -33,7 +34,9 @@ public class Player : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Monster") != null)
         {
             monster = GameObject.FindGameObjectWithTag("Monster");
-            this.transform.LookAt(monster.transform);
+            Vector3 look = transform.InverseTransformPoint(monster.transform.position);
+            float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 270;
+            this.transform.Rotate(0, 0, angle);
         }
     }
 
@@ -46,5 +49,21 @@ public class Player : MonoBehaviour
     {
         Vector3 applyingForce = new Vector3 (directionValue[0] * spd, updown *  spd, directionValue[1] * spd);
         rigid.AddForce(applyingForce * Time.deltaTime, ForceMode.Impulse);
+    }
+
+    // Upgrades
+    public void UpgradeHP()
+    {
+        this.hp += 10;
+    }
+
+    public void UpgradeATK()
+    {
+        this.atk += 5;
+    }
+
+    public void UpgradeSPD()
+    {
+        this.spd += 5;
     }
 }
