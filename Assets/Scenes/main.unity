@@ -411,6 +411,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &172295948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172295949}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &172295949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172295948}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 737.47015, y: 99.876785, z: 7.1221914}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &223974226
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,7 +922,7 @@ MonoBehaviour:
   monsterTarget: {fileID: 697038293}
   playerTarget: {fileID: 583612093}
   monster: {fileID: 1443831825899348071, guid: ec2c064b3ca1d0244a478cef39501c62, type: 3}
-  player: {fileID: 0}
+  player: {fileID: 4594135192229202178, guid: 2efd77509c680c3468e0d24f4c47f9f7, type: 3}
   spawnBtnUI: {fileID: 1515208318}
   spawnBtnUIText: {fileID: 753749798}
 --- !u!4 &587896515
@@ -35499,3 +35530,4 @@ SceneRoots:
   - {fileID: 232703360}
   - {fileID: 697038299}
   - {fileID: 583612097}
+  - {fileID: 172295949}
