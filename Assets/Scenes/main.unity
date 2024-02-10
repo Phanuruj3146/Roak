@@ -891,7 +891,7 @@ MonoBehaviour:
   monsterTarget: {fileID: 697038293}
   playerTarget: {fileID: 583612093}
   monster: {fileID: 1443831825899348071, guid: ec2c064b3ca1d0244a478cef39501c62, type: 3}
-  player: {fileID: 5119823857440171179, guid: eb2cbc73e703fea4aaaab27cba4b3461, type: 3}
+  player: {fileID: 0}
   spawnBtnUI: {fileID: 1515208318}
   spawnBtnUIText: {fileID: 753749798}
 --- !u!4 &587896515
