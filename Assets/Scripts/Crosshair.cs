@@ -16,6 +16,7 @@ public class Crosshair : MonoBehaviour
     public GameObject player;
     public Button spawnBtnUI;
     public TextMeshProUGUI spawnBtnUIText;
+    public GameObject movementJoystick;
 
     private Pose placementPose;
     private bool monsterExist = false;
@@ -25,7 +26,7 @@ public class Crosshair : MonoBehaviour
     {
         Button spawnBtn = spawnBtnUI.GetComponent<Button>();
         spawnBtn.onClick.AddListener(InstantiateObject);
-
+        movementJoystick.SetActive(false);
     }
 
     // Update is called once per frame
@@ -68,6 +69,7 @@ public class Crosshair : MonoBehaviour
             type = "Player";
             spawnBtnUI.gameObject.SetActive(false);
             Debug.Log("time to move!");
+            movementJoystick.SetActive(true);
         }
         if (type == "Monster")
         {

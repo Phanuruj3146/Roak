@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public Rigidbody rigid;
     public CharInputSystem actionMap;
     [SerializeField] private Vector2 directionValue;
-    [SerializeField] private float forcePower = 1f;
+    // [SerializeField] private float forcePower = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         directionValue = actionMap.Player.Movement.ReadValue<Vector2>();
+        Debug.Log(directionValue[0]);
         // Make player focus enemy
         if (GameObject.FindGameObjectWithTag("Monster") != null)
         {
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
 
     void ApplyForce()
     {
-        Vector3 applyingForce = directionValue * forcePower;
-        rigid.AddForce(applyingForce, ForceMode.Impulse);
+        Vector3 applyingForce = new Vector3 (directionValue[0] * spd, 0f, directionValue[1] * spd);
+        rigid.AddForce(applyingForce * Time.deltaTime, ForceMode.Impulse);
     }
 }

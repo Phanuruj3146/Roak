@@ -231,7 +231,6 @@ MonoBehaviour:
   monster: {fileID: 5120353838322236121, guid: 37051660314e30e4bb516166f7f12e75, type: 3}
   rigid: {fileID: 6995797197402668372}
   directionValue: {x: 0, y: 0}
-  forcePower: 1
 --- !u!54 &6995797197402668372
 Rigidbody:
   m_ObjectHideFlags: 0
