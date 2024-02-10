@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public int hp = 100;
     public int atk = 10;
     public float spd = 10;
+    public int parryGauge = 50;
     public GameObject monster;
     public Rigidbody rigid;
     public CharInputSystem actionMap;
