@@ -66,6 +66,7 @@ public class Crosshair : MonoBehaviour
             Instantiate(player, placementPose.position, placementPose.rotation);
             type = "Player";
             spawnBtnUI.gameObject.SetActive(false);
+            Debug.Log("time to move!");
         }
         if (type == "Monster")
         {
