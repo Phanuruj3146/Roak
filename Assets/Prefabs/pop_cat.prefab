@@ -200,6 +200,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5590583299098445912, guid: df6916d7061cd3f4993f0d27e1e3b60f, type: 3}
+  maxLaser: 5
+  laser: {fileID: 5253974722410340805, guid: d2380ab00378c0041bf347f2110f3cd1, type: 3}
+  laserList: []
 --- !u!65 &4955648401339290443
 BoxCollider:
   m_ObjectHideFlags: 0
