@@ -18,7 +18,9 @@ public class Player : MonoBehaviour
     public List<GameObject> bulletList = new List<GameObject>();
 
     private float isAttack;
-    private bool canPress = true;
+    private float isParry;
+    private bool canPressAtk = true;
+
     private int currentBullet = 0;
 
     [SerializeField] private Vector2 directionValue;
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
         directionValue = actionMap.Player.Movement.ReadValue<Vector2>();
         updown = actionMap.Player.UpDown.ReadValue<float>();
         isAttack = actionMap.Player.Attack.ReadValue<float>();
-
+        isParry = actionMap.Player.Parry.ReadValue<float>();
         // Make player focus enemy
         if (GameObject.FindGameObjectWithTag("Monster") != null)
         {
@@ -58,9 +60,14 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         ApplyForce();
-        if (isAttack == 1)
+        if (isAttack == 1 && canPressAtk)
         {
             Attack();
+        }
+        
+        else if (isParry == 1)
+        {
+            Parry();
         }
     }
 
@@ -78,14 +85,20 @@ public class Player : MonoBehaviour
             currentBullet = 0;
         }
         Vector3 currentPos = this.transform.position;
-        currentPos.x += 0.1f;
-        currentPos.y -= 0.8f;
+        //currentPos.x += 0.1f;
+        //currentPos.y -= 0.8f;
 
         bulletList[currentBullet].transform.position = this.transform.position;
         bulletList[currentBullet].GetComponent<Renderer>().enabled = true;
-        bulletList[currentBullet].GetComponent<Rigidbody>().velocity = Vector3.zero;
-        bulletList[currentBullet].transform.position = currentPos;
+        // bulletList[currentBullet].GetComponent<Rigidbody>().velocity = Vector3.zero;
+        bulletList[currentBullet].GetComponent<Rigidbody>().velocity = transform.forward * 10;
+        //bulletList[currentBullet].transform.position = currentPos;
         currentBullet++;
+    }
+
+    void Parry()
+    {
+        Debug.Log("parry");
     }
 
     // Upgrades
@@ -107,12 +120,12 @@ public class Player : MonoBehaviour
     private IEnumerator ButtonDelayCoroutine()
     {
         // Disable button press
-        canPress = false;
+        canPressAtk = false;
 
         // Wait for the delay (adjust the time accordingly)
         yield return new WaitForSeconds(0.5f); // Adjust the delay time as needed
 
         // Enable button press after the delay
-        canPress = true;
+        canPressAtk = true;
     }
 }

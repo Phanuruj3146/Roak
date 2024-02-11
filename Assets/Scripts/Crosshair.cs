@@ -18,6 +18,7 @@ public class Crosshair : MonoBehaviour
     public TextMeshProUGUI spawnBtnUIText;
     public GameObject movementJoystick;
     public GameObject updownJoystick;
+    public GameObject parryBtn;
     public GameObject gameManager;
 
     private Pose placementPose;
@@ -29,7 +30,8 @@ public class Crosshair : MonoBehaviour
         Button spawnBtn = spawnBtnUI.GetComponent<Button>();
         spawnBtn.onClick.AddListener(InstantiateObject);
         movementJoystick.SetActive(false);
-        updownJoystick.SetActive(false);    
+        updownJoystick.SetActive(false);
+        parryBtn.SetActive(false);
     }
 
     // Update is called once per frame
@@ -76,7 +78,7 @@ public class Crosshair : MonoBehaviour
             Debug.Log("time to move!");
             movementJoystick.SetActive(true);
             updownJoystick.SetActive(true);
-
+            parryBtn.SetActive(true);
             gameManager.GetComponent<GameManager>().StartGame();
 
         }

@@ -228,9 +228,15 @@ MonoBehaviour:
   hp: 100
   atk: 10
   spd: 10
+  parryGauge: 50
+  money: 0
+  maxBullet: 5
   monster: {fileID: 5120353838322236121, guid: 37051660314e30e4bb516166f7f12e75, type: 3}
   rigid: {fileID: 6995797197402668372}
+  bullet: {fileID: 5848230601404961309, guid: 39a1f54e49f3ea148b0ab1accdc56574, type: 3}
+  bulletList: []
   directionValue: {x: 0, y: 0}
+  updown: 0
 --- !u!54 &6995797197402668372
 Rigidbody:
   m_ObjectHideFlags: 0
