@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -14,5 +15,17 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Monster") {
+            if (GameObject.FindGameObjectWithTag("Monster") != null)
+            {
+                GameObject monster = GameObject.FindGameObjectWithTag("Monster");
+                //GameObject player = GameObject.FindGameObjectWithTag("Player");
+                monster.GetComponent<Monster>().DamageMonster();
+            }
+        }
     }
 }
