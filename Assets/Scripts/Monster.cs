@@ -9,6 +9,11 @@ public class Monster : MonoBehaviour
     public int maxLaser = 5;
     public GameObject laser;
     public List<GameObject> laserList = new List<GameObject>();
+    public int hp;
+    public int atk;
+    public int atkCD;
+    float currHp;
+    public GameObject gameManager;
 
     private bool canAttack = true;
     private int currentLaser = 0;
@@ -21,6 +26,10 @@ public class Monster : MonoBehaviour
             newLaser.GetComponent<Renderer>().enabled = false;
             laserList.Add(newLaser);
         }
+        int playerLV = player.gameObject.GetComponent<Player>().lv;
+        hp = 100 * playerLV;
+        atk = 20 * playerLV;
+        currHp = hp;
     }
 
     // Update is called once per frame
@@ -66,6 +75,20 @@ public class Monster : MonoBehaviour
         canAttack = false;
         yield return new WaitForSeconds(2f); // Adjust the delay time as needed
         canAttack = true;
+    }
+
+    public void DamageMonster()
+    {
+        Debug.Log("Monster is attacked");
+        currHp -= player.GetComponent<Player>().atk;
+        Debug.Log($"Current Hp is {currHp}");
+        if (currHp <= 0 )
+        {
+            Debug.Log("Monster Dead!");
+            this.gameObject.SetActive(false);
+            gameManager = GameObject.FindGameObjectWithTag("GameController");
+            gameManager.GetComponent<GameManager>().Shopping();
+        }
     }
 
 }
