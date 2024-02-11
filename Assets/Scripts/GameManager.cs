@@ -46,4 +46,9 @@ public class GameManager : MonoBehaviour
     {
         gameState = GameState.Gameplay;
     }
+
+    public void Shopping()
+    {
+        gameState = GameState.Shopping;
+    }
 }

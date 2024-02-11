@@ -5,6 +5,7 @@ using UnityEngine.Animations;
 
 public class Player : MonoBehaviour
 {
+    public int lv = 1;
     public int hp = 100;
     public int atk = 10;
     public float spd = 10;
@@ -51,9 +52,8 @@ public class Player : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Monster") != null)
         {
             monster = GameObject.FindGameObjectWithTag("Monster");
-            Vector3 look = transform.InverseTransformPoint(monster.transform.position);
-            float angle = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg - 270;
-            this.transform.Rotate(0, 0, angle);
+            this.transform.LookAt(monster.transform.position);
+            this.transform.Rotate(-90, 90, -90);
         }
     }
 
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         bulletList[currentBullet].transform.position = this.transform.position;
         bulletList[currentBullet].GetComponent<Renderer>().enabled = true;
         // bulletList[currentBullet].GetComponent<Rigidbody>().velocity = Vector3.zero;
-        bulletList[currentBullet].GetComponent<Rigidbody>().velocity = transform.forward * 10;
+        bulletList[currentBullet].GetComponent<Rigidbody>().velocity = (transform.up * -1f) * 10;
         //bulletList[currentBullet].transform.position = currentPos;
         currentBullet++;
     }
