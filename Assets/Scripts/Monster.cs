@@ -36,7 +36,6 @@ public class Monster : MonoBehaviour
             atk = 20 * playerLV;
             currHp = hp;
         }
-
     }
 
     // Update is called once per frame
@@ -74,25 +73,15 @@ public class Monster : MonoBehaviour
             currentLaser = 0;
         }
         Vector3 direction = player.transform.position - transform.position;
-        // Vector3 direction = player.transform.position;
         
         laserList[currentLaser].transform.position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z);
-        // laserList[currentLaser].transform.rotation = player.transform.rotation;
-        // laserList[currentLaser].transform.rotation = Quaternion.LookRotation(direction.normalized + new Vector3(1, 1, 1));
         laserList[currentLaser].GetComponent<Renderer>().enabled = true;
-        // float minLeft = player.transform.position.x - 1f;
-        // float minRight = player.transform.position.x + 1f;
-        // float minLeft = direction.x - 1f;
-        // float minRight = direction.x + 1f;
         float randx = Random.Range(direction.x - 1f, direction.x + 1f);
         float randy = Random.Range(direction.y - 1f, direction.y + 1f);
         float randz = Random.Range(direction.z - 1f, direction.z + 1f);
-        laserList[currentLaser].GetComponent<Rigidbody>().velocity = new Vector3(randx, direction.y, direction.z).normalized * 10;
-        // laserList[currentLaser].GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(minLeft, minRight), 0f, 0f)*5;
-        // laserList[currentLaser ].GetComponent<Rigidbody>().AddForce(new Vector3(2f, 0f, 0f) * Time.deltaTime, ForceMode.Impulse);
-
-        float rotX = Mathf.Atan2(direction.y, Mathf.Sqrt(randx * randx + direction.z * direction.z)) * Mathf.Rad2Deg;
-        float rotY = Mathf.Atan2(-randx, -direction.z) * Mathf.Rad2Deg;
+        laserList[currentLaser].GetComponent<Rigidbody>().velocity = new Vector3(direction.x, direction.y, direction.z).normalized * 10;
+        float rotX = Mathf.Atan2(direction.y, Mathf.Sqrt(direction.x * direction.x + direction.z * direction.z)) * Mathf.Rad2Deg;
+        float rotY = Mathf.Atan2(-direction.x, -direction.z) * Mathf.Rad2Deg;
         float rotZ = 0f;
         laserList[currentLaser].transform.rotation = Quaternion.Euler(rotX - 90, rotY, rotZ);
         currentLaser++;
