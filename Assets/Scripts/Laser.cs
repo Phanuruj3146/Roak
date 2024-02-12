@@ -21,6 +21,8 @@ public class Laser : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             this.gameObject.GetComponent<Renderer>().enabled = false;
+            GameObject gameManager = GameObject.FindGameObjectWithTag("GameController");
+            gameManager.GetComponent<GameManager>().PlayerHit();
         }
     }
 }

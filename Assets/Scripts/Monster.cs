@@ -17,14 +17,14 @@ public class Monster : MonoBehaviour
     public int hp;
     public int atk;
     public int atkCD;
-    public float currHp;
+    public int currHp;
     public GameObject gameManager;
     public bool canAttack;
 
     private int currentLaser = 0;
     private int currentBomb = 0;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         canAttack = true;
         if (GameObject.FindGameObjectWithTag("GameController") != null)
@@ -123,16 +123,24 @@ public class Monster : MonoBehaviour
 
     public void DamageMonster()
     {
-        Debug.Log("Monster is attacked");
         currHp -= player.GetComponent<Player>().atk;
-        Debug.Log($"Current Hp is {currHp}");
         if (currHp <= 0 )
         {
             Debug.Log("Monster Dead!");
             this.gameObject.SetActive(false);
             gameManager = GameObject.FindGameObjectWithTag("GameController");
+            player.GetComponent<Player>().IncreaseScore();
             gameManager.GetComponent<GameManager>().Shopping();
         }
     }
 
+    public int GetAtk()
+    {
+        return atk;
+    }
+
+    public int GetCurrentHp()
+    {
+        return currHp;
+    }
 }

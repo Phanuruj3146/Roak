@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Player : MonoBehaviour
 {
     public int lv = 1;
     public int hp = 100;
+    [SerializeField] public int currentHp;
     public int atk = 10;
-    public float spd = 10;
+    public int spd = 10;
     public int parryGauge = 50;
     public int money = 0;
     public int maxBullet = 5;
@@ -17,6 +20,7 @@ public class Player : MonoBehaviour
     public CharInputSystem actionMap;
     public GameObject bullet;
     public List<GameObject> bulletList = new List<GameObject>();
+    public int score;
 
     private float isAttack;
     private float isParry;
@@ -29,8 +33,9 @@ public class Player : MonoBehaviour
 
     // [SerializeField] private float forcePower = 1f;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        currentHp = hp;
         actionMap = new CharInputSystem();
         actionMap.Enable();
         for (int i = 0; i < maxBullet; i++)
@@ -104,17 +109,53 @@ public class Player : MonoBehaviour
     // Upgrades
     public void UpgradeHP()
     {
-        this.hp += 10;
+        hp += 10;
     }
 
     public void UpgradeATK()
     {
-        this.atk += 5;
+        atk += 5;
     }
 
     public void UpgradeSPD()
     {
-        this.spd += 5;
+        spd += 5;
+    }
+
+    public void IncreaseMoney(int amount)
+    {
+        money += amount;
+    }
+
+    public void IncreaseScore()
+    {
+        score += 1000;
+    }
+
+    public void DamagePlayer(int val)
+    {
+        currentHp -= val;
+        Debug.Log($"Current Player hp is : {currentHp}");
+    }
+
+    public GameObject GetPlayer()
+    {
+        return this.gameObject;
+    }
+
+    public int GetHp()
+    {
+        return hp;
+    }
+
+    public int GetCurrentHp()
+    {
+        return currentHp;
+    }
+
+    public int GetSpd()
+    {
+        return spd;
     }
 
     private IEnumerator ButtonDelayCoroutine()

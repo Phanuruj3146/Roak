@@ -62,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0ad4a1c73b7f76c4e97345a864d5391e, type: 3}
       propertyPath: m_Name
-      value: Pointer
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0ad4a1c73b7f76c4e97345a864d5391e, type: 3}
       propertyPath: m_TagString
@@ -147,7 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f507eeec0fb73bd4aad0e6f82b714535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lv: 1
   hp: 100
+  currentHp: 100
   atk: 10
   spd: 10
   parryGauge: 50
