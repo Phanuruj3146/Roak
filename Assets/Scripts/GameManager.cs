@@ -37,8 +37,8 @@ public class GameManager : MonoBehaviour
                 //timeTxt.text = "Score:" + score.ToString();
                 timeTxt.text = outputText;
             }
-        } else{
-            gameState = GameState.Postgame;
+            } else{
+                gameState = GameState.Postgame;
         }
     }
 
@@ -50,5 +50,10 @@ public class GameManager : MonoBehaviour
     public void Shopping()
     {
         gameState = GameState.Shopping;
+    }
+
+    public GameState GetGameState()
+    {
+        return gameState;
     }
 }
