@@ -199,10 +199,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766fc4f28ff269a4ebbb640e8d001032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameState: 0
   player: {fileID: 5590583299098445912, guid: df6916d7061cd3f4993f0d27e1e3b60f, type: 3}
-  maxLaser: 5
   laser: {fileID: 5253974722410340805, guid: d2380ab00378c0041bf347f2110f3cd1, type: 3}
+  bomb: {fileID: 2741484076512184282, guid: 89736f516c587f74da2146a128e47590, type: 3}
+  maxLaser: 5
+  maxBomb: 2
   laserList: []
+  bombList: []
+  hp: 0
+  atk: 0
+  atkCD: 0
+  currHp: 0
+  gameManager: {fileID: 0}
+  canAttack: 0
 --- !u!65 &4955648401339290443
 BoxCollider:
   m_ObjectHideFlags: 0
