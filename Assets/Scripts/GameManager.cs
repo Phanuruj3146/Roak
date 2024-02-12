@@ -12,10 +12,12 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI spdText;
     public TextMeshProUGUI bossHpText;
+    public TextMeshProUGUI moneyText;
     public float timeRemaining = 30;
     public GameState gameState;
     public GameObject player;
     public GameObject monster;
+    public GameObject shopManager;
 
     private string outputText;
     
@@ -67,10 +69,15 @@ public class GameManager : MonoBehaviour
             }
         } else if (gameState == GameState.Shopping)
         {
-            Debug.Log("Monster dead");
+            shopManager.SetActive(true);
             int score = player.GetComponent<Player>().score;
             scoreTxt.text = "Score:" + score.ToString();
             player.GetComponent<Player>().IncreaseMoney(100);
+
+            // Money
+            int money = player.GetComponent<Player>().money;
+            moneyText.text = money.ToString();
+
         }
     }
 
