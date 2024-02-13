@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
                 GameObject monster = GameObject.FindGameObjectWithTag("Monster");
                 //GameObject player = GameObject.FindGameObjectWithTag("Player");
                 monster.GetComponent<Monster>().DamageMonster();
-                this.gameObject.GetComponent<Renderer>().enabled = false;
+                this.gameObject.SetActive(false);
             }
         }
     }
