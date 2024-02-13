@@ -5,6 +5,7 @@ using UnityEngine;
 public class Barrier : MonoBehaviour
 {
     public GameObject player;
+    public GameObject parriedBomb;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,9 @@ public class Barrier : MonoBehaviour
         if (other.gameObject.tag == "Bomb")
         {
             Debug.Log("absorb bomb");
+            parriedBomb = Instantiate(parriedBomb);
+            parriedBomb.transform.position = this.transform.position;
+            parriedBomb.GetComponent<Rigidbody>().velocity = (this.transform.forward) * 10;
         }
     }
 }
