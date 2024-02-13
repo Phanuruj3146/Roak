@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using Core;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.XR.ARFoundation;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,6 +29,12 @@ public class GameManager : MonoBehaviour
     public List<GameObject> boxList = new List<GameObject>();
     public int maxBox = 3;
     public Vector3 monsterPos;
+    public GameObject uiController;
+    public GameObject gameover;
+    public TextMeshProUGUI finalScore;
+    public Button startAgain;
+    public ARSession arSession;
+    public GameObject crosshair;
 
     private string outputText;
     
@@ -48,8 +56,7 @@ public class GameManager : MonoBehaviour
             monster = GameObject.FindGameObjectWithTag("Monster");
             monster = monster.GetComponent<Monster>().GetMonster();
 
-            
-            if (timeRemaining > 1 && player.GetComponent<Player>().GetHp() >= 0)
+            if (timeRemaining > 1 && player.GetComponent<Player>().GetCurrentHp() > 0)
             {
                 // Time Countdown
                 timeRemaining -= Time.deltaTime;
@@ -81,13 +88,25 @@ public class GameManager : MonoBehaviour
                 int bossCurrentHp = monster.GetComponent<Monster>().GetCurrentHp();
                 string bossHpStat = "HP:" + bossCurrentHp + "/" + bossHp;
                 bossHpText.text = bossHpStat;
-            } else
+            } else if (player.GetComponent<Player>().GetCurrentHp() < 0)
             {
                 // Time run out
+                // Player HP
+                int playerHp = player.GetComponent<Player>().GetHp();
+                int playerCurrentHp = player.GetComponent<Player>().GetCurrentHp();
+                string playerHpStat = "HP:" + playerCurrentHp + "/" + playerHp;
+                hpText.text = playerHpStat;
+                uiController.SetActive(false);
                 gameState = GameState.Postgame;
+
+                gameover.SetActive(true);
+                finalScore.text = "Score:" + player.GetComponent<Player>().score;
+
+                Debug.Log("GAME OVER");
             }
         } else if (gameState == GameState.Shopping)
         {
+            uiController.SetActive(false);
             shopManager.SetActive(true);
             int score = player.GetComponent<Player>().score;
             scoreTxt.text = "Score:" + score.ToString();
@@ -132,6 +151,7 @@ public class GameManager : MonoBehaviour
         monster.SetActive(true);
         timeRemaining = 30;
         gameState = GameState.Gameplay;
+        uiController.SetActive(true);
     }
 
     public void GetMonsterVector3(Vector3 val)
@@ -146,6 +166,19 @@ public class GameManager : MonoBehaviour
             GameObject box = Instantiate(buffBox, new Vector3(Random.Range(posx - 2, posx + 4), posy, Random.Range(posz - 2, posz + 2)), Quaternion.identity);
             boxList.Add(box);
         }
-        Debug.Log(monsterPos);
+    }
+
+    public void ResetTheGame()
+    {
+        uiController.SetActive(false);
+        Destroy(monster);
+        Destroy(player);
+        for (int i = 0; i < maxBox; i++)
+        {
+            Destroy(boxList[i]);
+        }
+
+        crosshair.GetComponent<Crosshair>().Rescan();
+        gameState = GameState.PreGame;
     }
 }

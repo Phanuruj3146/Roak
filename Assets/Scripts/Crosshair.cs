@@ -39,6 +39,7 @@ public class Crosshair : MonoBehaviour
     {
         UpdatePlacementPose();
         UpdateTargetIndicator();
+        Debug.Log("still updating");
 
         //if (canPlace && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         //{
@@ -55,6 +56,12 @@ public class Crosshair : MonoBehaviour
         {
             InstantiateObject();
         }
+    }
+
+    public void Rescan()
+    {
+        monsterTarget.SetActive(true);
+        monsterTarget.SetActive(true);
     }
 
     void InstantiateObject()
