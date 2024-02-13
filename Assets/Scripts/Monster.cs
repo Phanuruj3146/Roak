@@ -41,9 +41,8 @@ public class Monster : MonoBehaviour
                 newBomb.SetActive(false);
                 bombList.Add(newBomb);
             }
-            int playerLV = player.gameObject.GetComponent<Player>().lv;
-            hp = 100 * playerLV;
-            atk = 20 * playerLV;
+            hp = 100;
+            atk = 20;
             currHp = hp;
         }
     }
