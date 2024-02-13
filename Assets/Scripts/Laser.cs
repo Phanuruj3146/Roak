@@ -18,9 +18,9 @@ public class Laser : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Barrier")
         {
-            this.gameObject.GetComponent<Renderer>().enabled = false;
+            this.gameObject.SetActive(false);
             GameObject gameManager = GameObject.FindGameObjectWithTag("GameController");
             gameManager.GetComponent<GameManager>().PlayerHit();
         }

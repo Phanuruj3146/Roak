@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     public CharInputSystem actionMap;
     public GameObject bullet;
     public List<GameObject> bulletList = new List<GameObject>();
+    public GameObject barrier;
     public int score;
 
     private float isAttack;
@@ -44,6 +45,8 @@ public class Player : MonoBehaviour
             newBullet.GetComponent<Renderer>().enabled = false;
             bulletList.Add(newBullet);
         }
+        barrier = Instantiate(barrier);
+        barrier.SetActive(false);
     }
 
     // Update is called once per frame
@@ -103,7 +106,9 @@ public class Player : MonoBehaviour
 
     void Parry()
     {
-        Debug.Log("parry");
+        StartCoroutine(ParryDelayCoroutine());
+        barrier.SetActive(true);
+        barrier.transform.position = this.transform.position;
     }
 
     // Upgrades
@@ -145,7 +150,6 @@ public class Player : MonoBehaviour
     public void DamagePlayer(int val)
     {
         currentHp -= val;
-        //Debug.Log($"Current Player hp is : {currentHp}");
     }
 
     public GameObject GetPlayer()
@@ -184,5 +188,13 @@ public class Player : MonoBehaviour
 
         // Enable button press after the delay
         canPressAtk = true;
+    }
+
+    private IEnumerator ParryDelayCoroutine()
+    {
+        // Wait for the delay (adjust the time accordingly)
+        yield return new WaitForSeconds(2f); // Adjust the delay time as needed
+        // Enable button press after the delay
+        barrier.SetActive(false);
     }
 }

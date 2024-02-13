@@ -8,7 +8,6 @@ public class Bomb : MonoBehaviour
     public GameObject player;
     public float moveSpeed = 1f;
     private Rigidbody rb;
-    private Vector3 movement;
 
     // Start is called before the first frame update
     void Start()
@@ -32,9 +31,9 @@ public class Bomb : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Barrier")
         {
-            this.gameObject.GetComponent<Renderer>().enabled = false;
+            this.gameObject.SetActive(false);
         }
     }
 
