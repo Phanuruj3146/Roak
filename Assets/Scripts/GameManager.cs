@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
                 int bossCurrentHp = monster.GetComponent<Monster>().GetCurrentHp();
                 string bossHpStat = "HP:" + bossCurrentHp + "/" + bossHp;
                 bossHpText.text = bossHpStat;
-            } else if (player.GetComponent<Player>().GetCurrentHp() < 0)
+            } else if (player.GetComponent<Player>().GetCurrentHp() <= 0)
             {
                 // Time run out
                 // Player HP
@@ -178,7 +178,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(boxList[i]);
         }
-
+        gameover.SetActive(false);
         crosshair.GetComponent<Crosshair>().Rescan();
         gameState = GameState.PreGame;
     }

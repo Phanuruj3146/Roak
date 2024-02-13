@@ -39,7 +39,6 @@ public class Crosshair : MonoBehaviour
     {
         UpdatePlacementPose();
         UpdateTargetIndicator();
-        Debug.Log("still updating");
 
         //if (canPlace && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         //{
@@ -106,7 +105,6 @@ public class Crosshair : MonoBehaviour
 
     void UpdatePlacementPose()
     {
-        Debug.Log("heeer");
         Vector3 screenCenter = xrCamera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
