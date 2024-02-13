@@ -87,7 +87,7 @@ public class Monster : MonoBehaviour
 
         Vector3 direction = player.transform.position - transform.position;
         int randAttack = Random.Range(1, 10);
-        if (randAttack >= 5)
+        if (randAttack >= 10)
         {
             laserList[currentLaser].SetActive(true);
             laserList[currentLaser].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);

@@ -38,14 +38,20 @@ public class Bomb : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Barrier")
+        if (other.gameObject.tag == "Player")
         {
             this.gameObject.SetActive(false);
-            ResetBullet();
+            ResetBomb();
+            player.GetComponent<Player>().DamagePlayer(50);
+        }
+        else if(other.gameObject.tag == "Barrier")
+        {
+            this.gameObject.SetActive(false);
+            ResetBomb();
         }
     }
 
-    private void ResetBullet()
+    private void ResetBomb()
     {
         // Reset the bullet's speed
         initialSpeed = 1f;

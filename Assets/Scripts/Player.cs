@@ -64,7 +64,6 @@ public class Player : MonoBehaviour
     {
         directionValue = actionMap.Player.Movement.ReadValue<Vector2>();
         updown = actionMap.Player.UpDown.ReadValue<float>();
-        Debug.Log(updown);
         isAttack = actionMap.Player.Attack.ReadValue<float>();
         isParry = actionMap.Player.Parry.ReadValue<float>();
         // Make player focus enemy
