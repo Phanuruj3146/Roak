@@ -159,5 +159,7 @@ MonoBehaviour:
   rigid: {fileID: 2053482778681693730}
   bullet: {fileID: 5848230601404961309, guid: 39a1f54e49f3ea148b0ab1accdc56574, type: 3}
   bulletList: []
+  barrier: {fileID: 7430322104312302121, guid: fd5e3a02d7f3501408db47a6c21d8cdd, type: 3}
+  score: 0
   directionValue: {x: 0, y: 0}
   updown: 0
