@@ -1133,6 +1133,7 @@ MonoBehaviour:
   gameover: {fileID: 1785434308}
   finalScore: {fileID: 1404160704}
   startAgain: {fileID: 0}
+  arSession: {fileID: 0}
   crosshair: {fileID: 587896512}
 --- !u!4 &294830528
 Transform:
@@ -39135,7 +39136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1749367916
 RectTransform:
   m_ObjectHideFlags: 0
@@ -39342,7 +39343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1785434309
 RectTransform:
   m_ObjectHideFlags: 0

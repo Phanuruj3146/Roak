@@ -92,6 +92,7 @@ public class GameManager : MonoBehaviour
             {
                 // Time run out
                 // Player HP
+
                 int playerHp = player.GetComponent<Player>().GetHp();
                 int playerCurrentHp = player.GetComponent<Player>().GetCurrentHp();
                 string playerHpStat = "HP:" + playerCurrentHp + "/" + playerHp;
@@ -162,8 +163,8 @@ public class GameManager : MonoBehaviour
         float posz = monsterPos.z;
         for (int i = 0; i < maxBox; i++)
         {
-            //GameObject box = Instantiate(buffBox, new Vector3(Random.Range(posx-2,posx+4), Random.Range(posy, posy + 4), Random.Range(posz - 2, posz + 2)), Quaternion.identity);
-            GameObject box = Instantiate(buffBox, new Vector3(Random.Range(posx - 2, posx + 4), posy, Random.Range(posz - 2, posz + 2)), Quaternion.identity);
+            GameObject box = Instantiate(buffBox, new Vector3(Random.Range(posx-2,posx+4), Random.Range(posy, posy + 4), Random.Range(posz - 2, posz + 2)), Quaternion.identity);
+            //GameObject box = Instantiate(buffBox, new Vector3(Random.Range(posx - 2, posx + 4), posy, Random.Range(posz - 2, posz + 2)), Quaternion.identity);
             boxList.Add(box);
         }
     }
