@@ -130,6 +130,8 @@ public class Monster : MonoBehaviour
             this.gameObject.SetActive(false);
             gameManager = GameObject.FindGameObjectWithTag("GameController");
             player.GetComponent<Player>().IncreaseScore();
+            player.GetComponent<Player>().IncreaseMoney(50);
+            player.GetComponent<Player>().IncreaseLevel();
             gameManager.GetComponent<GameManager>().Shopping();
         }
     }
@@ -142,5 +144,19 @@ public class Monster : MonoBehaviour
     public int GetCurrentHp()
     {
         return currHp;
+    }
+
+    public void SetBossHp()
+    {
+        currHp = 100;
+    }
+
+    public void RespawnMonster()
+    {
+        Debug.Log("ASD");
+        int playerLV = player.GetComponent<Player>().lv;
+        hp = 100 * playerLV;
+        atk = 20 * playerLV;
+        currHp = hp;
     }
 }
