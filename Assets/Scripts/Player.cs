@@ -187,6 +187,17 @@ public class Player : MonoBehaviour
         return spd;
     }
 
+    public void Heal()
+    {
+        Debug.Log("heal");
+        if (currentHp < hp-5)
+        {
+            currentHp += 5;
+        } else if (currentHp < hp) { 
+            currentHp = hp;
+        }
+    }
+
     private IEnumerator ButtonDelayCoroutine()
     {
         // Disable button press

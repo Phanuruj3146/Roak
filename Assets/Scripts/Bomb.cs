@@ -33,7 +33,6 @@ public class Bomb : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, initialSpeed * Time.deltaTime);
             initialSpeed += accelerationRate * Time.deltaTime;
-            Debug.Log(initialSpeed);
             initialSpeed = Mathf.Min(initialSpeed, maxSpeed);
         }
     }
@@ -41,7 +40,6 @@ public class Bomb : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Barrier")
         {
-            Debug.Log("hit player");
             this.gameObject.SetActive(false);
             ResetBullet();
         }

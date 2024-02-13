@@ -1125,6 +1125,10 @@ MonoBehaviour:
   shopManager: {fileID: 2022171858}
   respawnBtn: {fileID: 1419674344}
   monObj: {fileID: 587896512}
+  buffBox: {fileID: 1857159624144440417, guid: 400b3210f321da641adf0d459ca08bf9, type: 3}
+  boxList: []
+  maxBox: 3
+  monsterPos: {x: 0, y: 0, z: 0}
 --- !u!4 &294830528
 Transform:
   m_ObjectHideFlags: 0

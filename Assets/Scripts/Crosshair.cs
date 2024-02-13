@@ -66,6 +66,7 @@ public class Crosshair : MonoBehaviour
             GameObject monsterObj = Instantiate(monster, placementPose.position, Quaternion.Euler(-90,0,0));
             type = "Monster";
             spawnBtnUIText.text = "Spawn Player";
+            gameManager.GetComponent<GameManager>().GetMonsterVector3(placementPose.position);
 
         }
         else if (playerExist == false)
@@ -142,4 +143,5 @@ public class Crosshair : MonoBehaviour
             }
         }
     }
+
 }

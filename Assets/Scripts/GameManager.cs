@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     public GameObject shopManager;
     public Button respawnBtn;
     public GameObject monObj;
+    public GameObject buffBox;
+    public List<GameObject> boxList = new List<GameObject>();
+    public int maxBox = 3;
+    public Vector3 monsterPos;
 
     private string outputText;
     
@@ -43,6 +47,8 @@ public class GameManager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
             monster = GameObject.FindGameObjectWithTag("Monster");
             monster = monster.GetComponent<Monster>().GetMonster();
+
+            
             if (timeRemaining > 1 && player.GetComponent<Player>().GetHp() >= 0)
             {
                 // Time Countdown
@@ -126,5 +132,20 @@ public class GameManager : MonoBehaviour
         monster.SetActive(true);
         timeRemaining = 30;
         gameState = GameState.Gameplay;
+    }
+
+    public void GetMonsterVector3(Vector3 val)
+    {
+        monsterPos = val;
+        float posx = monsterPos.x;
+        float posy = monsterPos.y;
+        float posz = monsterPos.z;
+        for (int i = 0; i < maxBox; i++)
+        {
+            //GameObject box = Instantiate(buffBox, new Vector3(Random.Range(posx-2,posx+4), Random.Range(posy, posy + 4), Random.Range(posz - 2, posz + 2)), Quaternion.identity);
+            GameObject box = Instantiate(buffBox, new Vector3(Random.Range(posx - 2, posx + 4), posy, Random.Range(posz - 2, posz + 2)), Quaternion.identity);
+            boxList.Add(box);
+        }
+        Debug.Log(monsterPos);
     }
 }

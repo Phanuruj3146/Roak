@@ -9,6 +9,7 @@ TagManager:
   - Laser
   - Bomb
   - UIController
+  - buffBox
   layers:
   - Default
   - TransparentFX
