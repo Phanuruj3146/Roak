@@ -90,12 +90,12 @@ public class Monster : MonoBehaviour
         if (randAttack >= 5)
         {
             laserList[currentLaser].SetActive(true);
-            laserList[currentLaser].transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+            laserList[currentLaser].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
             float randx = Random.Range(direction.x - 1f, direction.x + 1f);
             float randy = Random.Range(direction.y - 1f, direction.y + 1f);
             float randz = Random.Range(direction.z - 1f, direction.z + 1f);
-            laserList[currentLaser].GetComponent<Rigidbody>().velocity = new Vector3(direction.x, direction.y, direction.z).normalized * 10;
-            float rotX = Mathf.Atan2(direction.y, Mathf.Sqrt(direction.x * direction.x + direction.z * direction.z)) * Mathf.Rad2Deg;
+            laserList[currentLaser].GetComponent<Rigidbody>().velocity = new Vector3(direction.x, direction.y - 1f, direction.z).normalized * 10;
+            float rotX = Mathf.Atan2(direction.y - 1f, Mathf.Sqrt(direction.x * direction.x + direction.z * direction.z)) * Mathf.Rad2Deg;
             float rotY = Mathf.Atan2(-direction.x, -direction.z) * Mathf.Rad2Deg;
             float rotZ = 0f;
             laserList[currentLaser].transform.rotation = Quaternion.Euler(rotX - 90, rotY, rotZ);
@@ -105,7 +105,7 @@ public class Monster : MonoBehaviour
         {
             // Debug.Log("bomb");
             bombList[currentBomb].SetActive(true);
-            bombList[currentBomb].transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+            bombList[currentBomb].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
             // bombList[currentBomb].GetComponent<Rigidbody>().velocity = new Vector3(direction.x, direction.y, direction.z).normalized * 10;
             currentBomb++;
         }
