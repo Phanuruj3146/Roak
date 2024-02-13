@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
 
             // Money
             int money = player.GetComponent<Player>().money;
-            moneyText.text = money.ToString();
+            moneyText.text = "Money:" + money.ToString();
             if (monster.GetComponent<Monster>().GetCurrentHp() <= 0)
             {
                 int bossHp = monster.GetComponent<Monster>().hp;
