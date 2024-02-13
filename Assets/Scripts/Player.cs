@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Animations;
 using UnityEngine.SocialPlatforms.Impl;
+using Core;
 
 public class Player : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
     // public List<GameObject> parriedBbombList = new List<GameObject>();
     public GameObject barrier;
     public int score;
-
+    public GameObject gameManager;
     private float isAttack;
     private float isParry;
     private bool canPressAtk = true;
@@ -62,11 +63,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        directionValue = actionMap.Player.Movement.ReadValue<Vector2>();
-        updown = actionMap.Player.UpDown.ReadValue<float>();
-        Debug.Log(updown);
-        isAttack = actionMap.Player.Attack.ReadValue<float>();
-        isParry = actionMap.Player.Parry.ReadValue<float>();
+        gameManager = GameObject.FindGameObjectWithTag("GameController");
+        if (gameManager.GetComponent<GameManager>().GetGameState() == GameState.Gameplay)
+        {
+            directionValue = actionMap.Player.Movement.ReadValue<Vector2>();
+            updown = actionMap.Player.UpDown.ReadValue<float>();
+            Debug.Log(updown);
+            isAttack = actionMap.Player.Attack.ReadValue<float>();
+            isParry = actionMap.Player.Parry.ReadValue<float>();
+        }
         // Make player focus enemy
         if (GameObject.FindGameObjectWithTag("Monster") != null)
         {

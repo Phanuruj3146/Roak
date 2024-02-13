@@ -61,7 +61,9 @@ public class Crosshair : MonoBehaviour
     public void Rescan()
     {
         monsterTarget.SetActive(true);
-        monsterTarget.SetActive(true);
+        playerTarget.SetActive(true);
+        monsterExist = false;
+        playerExist = false;
     }
 
     void InstantiateObject()
@@ -70,7 +72,7 @@ public class Crosshair : MonoBehaviour
         if (monsterExist == false)
         {
 
-            GameObject monsterObj = Instantiate(monster, placementPose.position, Quaternion.Euler(-90,0,0));
+            Instantiate(monster, placementPose.position, Quaternion.Euler(-90,0,0));
             type = "Monster";
             spawnBtnUIText.text = "Spawn Player";
             gameManager.GetComponent<GameManager>().GetMonsterVector3(placementPose.position);
@@ -104,6 +106,7 @@ public class Crosshair : MonoBehaviour
 
     void UpdatePlacementPose()
     {
+        Debug.Log("heeer");
         Vector3 screenCenter = xrCamera.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
