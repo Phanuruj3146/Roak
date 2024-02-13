@@ -1123,6 +1123,7 @@ MonoBehaviour:
   monster: {fileID: 5120353838322236121, guid: 37051660314e30e4bb516166f7f12e75, type: 3}
   shopManager: {fileID: 2022171858}
   respawnBtn: {fileID: 1419674344}
+  monObj: {fileID: 587896512}
 --- !u!4 &294830528
 Transform:
   m_ObjectHideFlags: 0

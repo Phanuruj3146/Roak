@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject monster;
     public GameObject shopManager;
     public Button respawnBtn;
+    public GameObject monObj;
 
     private string outputText;
     
@@ -67,6 +68,10 @@ public class GameManager : MonoBehaviour
                 // Boss HP
                 int bossHp = monster.GetComponent<Monster>().hp;
                 int bossCurrentHp = monster.GetComponent<Monster>().GetCurrentHp();
+                if (bossCurrentHp >= 0)
+                {
+                    monster = monster.GetComponent<Monster>().GetMonster();
+                }
                 string bossHpStat = "HP:" + bossCurrentHp + "/" + bossHp;
                 bossHpText.text = bossHpStat;
             } else
@@ -109,9 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void RespawnMonster()
     {
-        Debug.Log("Respawning");
-        monster.GetComponent<Monster>().SetBossHp();
-        monster.GetComponent<Monster>().RespawnMonster();
-        //gameState = GameState.Gameplay;
+        monster.SetActive(true);
+        
     }
 }

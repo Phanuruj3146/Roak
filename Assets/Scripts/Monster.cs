@@ -152,10 +152,14 @@ public class Monster : MonoBehaviour
 
     public void RespawnMonster()
     {
-        Debug.Log("ASD");
         int playerLV = player.GetComponent<Player>().lv;
         hp = 100 * playerLV;
         atk = 20 * playerLV;
         currHp = hp;
+    }
+
+    public GameObject GetMonster()
+    {
+        return this.gameObject;
     }
 }
