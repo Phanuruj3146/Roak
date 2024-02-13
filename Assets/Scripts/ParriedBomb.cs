@@ -25,7 +25,7 @@ public class ParriedBomb : MonoBehaviour
                 GameObject monster = GameObject.FindGameObjectWithTag("Monster");
                 //GameObject player = GameObject.FindGameObjectWithTag("Player");
                 monster.GetComponent<Monster>().DamageMonster();
-                Destroy(this);
+                Destroy(this.gameObject);
             }
         }
     }
