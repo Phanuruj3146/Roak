@@ -150,7 +150,7 @@ MonoBehaviour:
   lv: 1
   hp: 100
   currentHp: 100
-  atk: 10
+  atk: 100
   spd: 10
   parryGauge: 50
   money: 0
@@ -159,5 +159,6 @@ MonoBehaviour:
   rigid: {fileID: 2053482778681693730}
   bullet: {fileID: 5848230601404961309, guid: 39a1f54e49f3ea148b0ab1accdc56574, type: 3}
   bulletList: []
+  score: 0
   directionValue: {x: 0, y: 0}
   updown: 0

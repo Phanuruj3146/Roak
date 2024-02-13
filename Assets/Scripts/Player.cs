@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public int lv = 1;
     public int hp = 100;
     [SerializeField] public int currentHp;
-    public int atk = 10;
+    public int atk = 100;
     public int spd = 10;
     public int parryGauge = 50;
     public int money = 0;
@@ -127,15 +127,25 @@ public class Player : MonoBehaviour
         money += amount;
     }
 
+    public void DecreaseMoney(int amount)
+    {
+        money -= amount;
+    }
+
     public void IncreaseScore()
     {
         score += 1000;
     }
 
+    public void IncreaseLevel()
+    {
+        lv += 1;
+    }
+
     public void DamagePlayer(int val)
     {
         currentHp -= val;
-        Debug.Log($"Current Player hp is : {currentHp}");
+        //Debug.Log($"Current Player hp is : {currentHp}");
     }
 
     public GameObject GetPlayer()
@@ -145,12 +155,18 @@ public class Player : MonoBehaviour
 
     public int GetHp()
     {
+        //Debug.Log($"current hp {hp}");
         return hp;
     }
 
     public int GetCurrentHp()
     {
         return currentHp;
+    }
+
+    public int GetAtk()
+    {
+        return atk;
     }
 
     public int GetSpd()

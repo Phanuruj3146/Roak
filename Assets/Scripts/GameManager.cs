@@ -4,12 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using Core;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI timeTxt;
     public TextMeshProUGUI scoreTxt;
     public TextMeshProUGUI hpText;
+    public TextMeshProUGUI atkText;
     public TextMeshProUGUI spdText;
     public TextMeshProUGUI bossHpText;
     public TextMeshProUGUI moneyText;
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject monster;
     public GameObject shopManager;
+    public Button respawnBtn;
 
     private string outputText;
     
@@ -33,10 +36,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        monster = GameObject.FindGameObjectWithTag("Monster");
         if (gameState == GameState.Gameplay)
         {
+            player = GameObject.FindGameObjectWithTag("Player");
+            monster = GameObject.FindGameObjectWithTag("Monster");
             if (timeRemaining > 1 && player.GetComponent<Player>().GetHp() >= 0)
             {
                 // Time Countdown
@@ -52,6 +55,10 @@ public class GameManager : MonoBehaviour
                 int playerCurrentHp = player.GetComponent<Player>().GetCurrentHp();
                 string playerHpStat = "HP:" + playerCurrentHp + "/" + playerHp;
                 hpText.text = playerHpStat;
+
+                // Player ATK
+                int playerAtk = player.GetComponent<Player>().GetAtk();
+                atkText.text = "ATK:" + playerAtk;
 
                 // Player SPD
                 int playerSpd = player.GetComponent<Player>().GetSpd();
@@ -72,7 +79,6 @@ public class GameManager : MonoBehaviour
             shopManager.SetActive(true);
             int score = player.GetComponent<Player>().score;
             scoreTxt.text = "Score:" + score.ToString();
-            player.GetComponent<Player>().IncreaseMoney(100);
 
             // Money
             int money = player.GetComponent<Player>().money;
@@ -99,5 +105,13 @@ public class GameManager : MonoBehaviour
     public void PlayerHit()
     {
         player.GetComponent<Player>().DamagePlayer(monster.GetComponent<Monster>().GetAtk());
+    }
+
+    public void RespawnMonster()
+    {
+        Debug.Log("Respawning");
+        monster.GetComponent<Monster>().SetBossHp();
+        monster.GetComponent<Monster>().RespawnMonster();
+        //gameState = GameState.Gameplay;
     }
 }
