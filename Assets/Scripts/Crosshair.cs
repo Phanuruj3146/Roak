@@ -63,6 +63,7 @@ public class Crosshair : MonoBehaviour
         playerTarget.SetActive(true);
         monsterExist = false;
         playerExist = false;
+        spawnBtnUI.gameObject.SetActive(true);
     }
 
     void InstantiateObject()

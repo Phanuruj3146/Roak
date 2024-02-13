@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour
             Destroy(boxList[i]);
         }
         gameover.SetActive(false);
+        
         crosshair.GetComponent<Crosshair>().Rescan();
         gameState = GameState.PreGame;
     }
