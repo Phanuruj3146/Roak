@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Animations;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -63,6 +64,7 @@ public class Player : MonoBehaviour
     {
         directionValue = actionMap.Player.Movement.ReadValue<Vector2>();
         updown = actionMap.Player.UpDown.ReadValue<float>();
+        Debug.Log(updown);
         isAttack = actionMap.Player.Attack.ReadValue<float>();
         isParry = actionMap.Player.Parry.ReadValue<float>();
         // Make player focus enemy
@@ -202,7 +204,7 @@ public class Player : MonoBehaviour
     private IEnumerator ParryDelayCoroutine()
     {
         // Wait for the delay (adjust the time accordingly)
-        yield return new WaitForSeconds(2f); // Adjust the delay time as needed
+        yield return new WaitForSeconds(1f); // Adjust the delay time as needed
         // Enable button press after the delay
         barrier.SetActive(false);
     }
