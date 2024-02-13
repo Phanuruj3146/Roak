@@ -9,8 +9,8 @@ public class Bomb : MonoBehaviour
     private Rigidbody rb;
     public float moveSpeed = 1f;
     public float initialSpeed = 1f;  // Initial speed of the bullet
-    public float accelerationRate = 10f;
-    // public float maxSpeed = 10f;
+    public float accelerationRate = 1.5f;
+    public float maxSpeed = 10f;
 
     private bool isActive = true;
 
@@ -29,25 +29,19 @@ public class Bomb : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Debug.Log(player.transform.position);
-        // Vector3 direction = player.transform.position - transform.position;
-        // direction.Normalize();
-        // moveCharacter(direction);
         if (isActive)
         {
-            float exponentialSpeed = initialSpeed * Mathf.Pow(1 + accelerationRate, Time.time);
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, exponentialSpeed * Time.deltaTime);
-
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, initialSpeed * Time.deltaTime);;
-            // initialSpeed += accelerationRate * Time.deltaTime;
-            // initialSpeed = Mathf.Min(initialSpeed, maxSpeed);
-            print(initialSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, initialSpeed * Time.deltaTime);
+            initialSpeed += accelerationRate * Time.deltaTime;
+            Debug.Log(initialSpeed);
+            initialSpeed = Mathf.Min(initialSpeed, maxSpeed);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Barrier")
         {
+            Debug.Log("hit player");
             this.gameObject.SetActive(false);
             ResetBullet();
         }
