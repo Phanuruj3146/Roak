@@ -15,19 +15,22 @@ public class Player : MonoBehaviour
     public int parryGauge = 50;
     public int money = 0;
     public int maxBullet = 5;
+    //public int maxParriedBomb = 2;
     public GameObject monster;
     public Rigidbody rigid;
     public CharInputSystem actionMap;
     public GameObject bullet;
+    //public GameObject parriedBomb;
     public List<GameObject> bulletList = new List<GameObject>();
+    // public List<GameObject> parriedBbombList = new List<GameObject>();
     public GameObject barrier;
     public int score;
 
     private float isAttack;
     private float isParry;
     private bool canPressAtk = true;
-
     private int currentBullet = 0;
+    //private int currentParriedBomb = 0;
 
     [SerializeField] private Vector2 directionValue;
     [SerializeField] private float updown;
@@ -42,9 +45,15 @@ public class Player : MonoBehaviour
         for (int i = 0; i < maxBullet; i++)
         {
             var newBullet = Instantiate(bullet);
-            newBullet.GetComponent<Renderer>().enabled = false;
+            newBullet.SetActive(false);
             bulletList.Add(newBullet);
         }
+        //for (int i = 0; i < maxParriedBomb; i++)
+        //{
+        //    var newParriedBomb = Instantiate(parriedBomb);
+        //    newParriedBomb.SetActive(false);
+        //    parriedBbombList.Add(newParriedBomb);
+        //}
         barrier = Instantiate(barrier);
         barrier.SetActive(false);
     }
@@ -88,7 +97,7 @@ public class Player : MonoBehaviour
     void Attack()
     {
         StartCoroutine(ButtonDelayCoroutine());
-        if (currentBullet == 5)
+        if (currentBullet == maxBullet)
         {
             currentBullet = 0;
         }
@@ -97,7 +106,7 @@ public class Player : MonoBehaviour
         //currentPos.y -= 0.8f;
 
         bulletList[currentBullet].transform.position = this.transform.position;
-        bulletList[currentBullet].GetComponent<Renderer>().enabled = true;
+        bulletList[currentBullet].SetActive(true);
         // bulletList[currentBullet].GetComponent<Rigidbody>().velocity = Vector3.zero;
         bulletList[currentBullet].GetComponent<Rigidbody>().velocity = (transform.up * -1f) * 10;
         //bulletList[currentBullet].transform.position = currentPos;

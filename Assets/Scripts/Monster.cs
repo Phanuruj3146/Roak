@@ -76,12 +76,12 @@ public class Monster : MonoBehaviour
     void Attack()
     {
         StartCoroutine(AttackDelayCoroutine());
-        if (currentLaser == 5)
+        if (currentLaser == maxLaser)
         {
             currentLaser = 0;
         }
 
-        if (currentBomb == 2)
+        if (currentBomb == maxBomb)
         {
             currentBomb = 0;
         }
