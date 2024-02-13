@@ -126,7 +126,6 @@ public class Monster : MonoBehaviour
         if (currHp <= 0 )
         {
             Debug.Log("Monster Dead!");
-            this.gameObject.SetActive(false);
             gameManager = GameObject.FindGameObjectWithTag("GameController");
             player.GetComponent<Player>().IncreaseScore();
             player.GetComponent<Player>().IncreaseMoney(50);
@@ -145,9 +144,11 @@ public class Monster : MonoBehaviour
         return currHp;
     }
 
-    public void SetBossHp()
+    public void SetMonsterStats()
     {
-        currHp = 100;
+        currHp = 100 * player.GetComponent<Player>().lv;
+        hp = currHp;
+        atk = 20 * player.GetComponent<Player>().lv;
     }
 
     public void RespawnMonster()

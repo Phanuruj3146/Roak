@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI spdText;
     public TextMeshProUGUI bossHpText;
     public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI lvText;
     public float timeRemaining = 30;
     public GameState gameState;
     public GameObject player;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         {
             player = GameObject.FindGameObjectWithTag("Player");
             monster = GameObject.FindGameObjectWithTag("Monster");
+            monster = monster.GetComponent<Monster>().GetMonster();
             if (timeRemaining > 1 && player.GetComponent<Player>().GetHp() >= 0)
             {
                 // Time Countdown
@@ -50,6 +52,9 @@ public class GameManager : MonoBehaviour
                 outputText = "Time left: " + string.Format("{0:00}:{1:00}", min, sec);
                 timeTxt.text = outputText;
 
+                // Player LV
+                int playerLv = player.GetComponent<Player>().lv;
+                lvText.text = "Level:" + playerLv;
 
                 // Player HP
                 int playerHp = player.GetComponent<Player>().GetHp();
@@ -68,10 +73,6 @@ public class GameManager : MonoBehaviour
                 // Boss HP
                 int bossHp = monster.GetComponent<Monster>().hp;
                 int bossCurrentHp = monster.GetComponent<Monster>().GetCurrentHp();
-                if (bossCurrentHp >= 0)
-                {
-                    monster = monster.GetComponent<Monster>().GetMonster();
-                }
                 string bossHpStat = "HP:" + bossCurrentHp + "/" + bossHp;
                 bossHpText.text = bossHpStat;
             } else
@@ -88,6 +89,13 @@ public class GameManager : MonoBehaviour
             // Money
             int money = player.GetComponent<Player>().money;
             moneyText.text = money.ToString();
+            if (monster.GetComponent<Monster>().GetCurrentHp() <= 0)
+            {
+                int bossHp = monster.GetComponent<Monster>().hp;
+                int bossCurrentHp = monster.GetComponent<Monster>().GetCurrentHp();
+                string bossHpStat = "HP:" + bossCurrentHp + "/" + bossHp;
+                bossHpText.text = bossHpStat;
+            }
 
         }
     }
@@ -114,7 +122,9 @@ public class GameManager : MonoBehaviour
 
     public void RespawnMonster()
     {
+        monster.GetComponent<Monster>().SetMonsterStats();
         monster.SetActive(true);
-        
+        timeRemaining = 30;
+        gameState = GameState.Gameplay;
     }
 }
