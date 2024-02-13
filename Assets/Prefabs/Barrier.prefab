@@ -119,4 +119,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5590583299098445912, guid: df6916d7061cd3f4993f0d27e1e3b60f, type: 3}
+  monster: {fileID: 5120353838322236121, guid: 37051660314e30e4bb516166f7f12e75, type: 3}
   parriedBomb: {fileID: 3874518140545689579, guid: 329d4205a589d93478db1274d55fa2f4, type: 3}
+  currParriedBomb: {fileID: 0}

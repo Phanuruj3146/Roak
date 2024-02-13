@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad828a82bdc60441a134e85d122b97b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 5590583299098445912, guid: df6916d7061cd3f4993f0d27e1e3b60f, type: 3}
+  monster: {fileID: 5120353838322236121, guid: 37051660314e30e4bb516166f7f12e75, type: 3}
 --- !u!54 &5148475764024575897
 Rigidbody:
   m_ObjectHideFlags: 0

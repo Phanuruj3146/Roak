@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI bossHpText;
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI lvText;
-    public float timeRemaining = 30;
+    public float timeRemaining;
     public GameState gameState;
     public GameObject player;
     public GameObject monster;
@@ -36,15 +36,19 @@ public class GameManager : MonoBehaviour
     public ARSession arSession;
     public GameObject crosshair;
 
+    private float gameDurationInSeconds = 50f;
     private string outputText;
     
     // Start is called before the first frame update
     void Start()
     {
-        float min = Mathf.FloorToInt(timeRemaining / 60);
-        float sec = Mathf.FloorToInt(timeRemaining % 60);
-        outputText = "Time left: " + string.Format("{0:00}:{1:00}", min, sec);
-        timeTxt.text = outputText;
+        // float min = Mathf.FloorToInt(timeRemaining / 60);
+        // float sec = Mathf.FloorToInt(timeRemaining % 60);
+        // outputText = "Time left: " + string.Format("{0:00}:{1:00}", min, sec);
+        // timeTxt.text = outputText;
+        timeRemaining = gameDurationInSeconds;
+        Debug.Log(timeRemaining);
+        // TimeUIText();
     }
 
     // Update is called once per frame
@@ -52,18 +56,16 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == GameState.Gameplay)
         {
+            // Debug.Log(timeRemaining);
             player = GameObject.FindGameObjectWithTag("Player");
             monster = GameObject.FindGameObjectWithTag("Monster");
             monster = monster.GetComponent<Monster>().GetMonster();
 
-            if (timeRemaining > 1 && player.GetComponent<Player>().GetCurrentHp() > 0)
+            if (timeRemaining > 0 && player.GetComponent<Player>().GetCurrentHp() > 0)
             {
                 // Time Countdown
                 timeRemaining -= Time.deltaTime;
-                float min = Mathf.Abs(Mathf.FloorToInt(timeRemaining / 60));
-                float sec = Mathf.Abs(Mathf.FloorToInt(timeRemaining % 60));
-                outputText = "Time left: " + string.Format("{0:00}:{1:00}", min, sec);
-                timeTxt.text = outputText;
+                TimeUIText();
 
                 // Player LV
                 int playerLv = player.GetComponent<Player>().lv;
@@ -88,22 +90,9 @@ public class GameManager : MonoBehaviour
                 int bossCurrentHp = monster.GetComponent<Monster>().GetCurrentHp();
                 string bossHpStat = "HP:" + bossCurrentHp + "/" + bossHp;
                 bossHpText.text = bossHpStat;
-            } else if (player.GetComponent<Player>().GetCurrentHp() <= 0)
+            } else if (player.GetComponent<Player>().GetCurrentHp() <= 0 || timeRemaining <= 0)
             {
-                // Time run out
-                // Player HP
-
-                int playerHp = player.GetComponent<Player>().GetHp();
-                int playerCurrentHp = player.GetComponent<Player>().GetCurrentHp();
-                string playerHpStat = "HP:" + playerCurrentHp + "/" + playerHp;
-                hpText.text = playerHpStat;
-                uiController.SetActive(false);
-                gameState = GameState.Postgame;
-
-                gameover.SetActive(true);
-                finalScore.text = "Score:" + player.GetComponent<Player>().score;
-
-                Debug.Log("GAME OVER");
+                GameOver(false);
             }
         } else if (gameState == GameState.Shopping)
         {
@@ -117,6 +106,9 @@ public class GameManager : MonoBehaviour
             moneyText.text = "Money:" + money.ToString();
             if (monster.GetComponent<Monster>().GetCurrentHp() <= 0)
             {
+                // player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                player.GetComponent<Rigidbody>().isKinematic = true;
+                // Time.timeScale = 0;
                 int bossHp = monster.GetComponent<Monster>().hp;
                 int bossCurrentHp = monster.GetComponent<Monster>().GetCurrentHp();
                 string bossHpStat = "HP:" + bossCurrentHp + "/" + bossHp;
@@ -136,6 +128,11 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Shopping;
     }
 
+    public void setKinematic()
+    {
+        gameState = GameState.Postgame;
+    }
+
     public GameState GetGameState()
     {
         return gameState;
@@ -150,9 +147,11 @@ public class GameManager : MonoBehaviour
     {
         monster.GetComponent<Monster>().SetMonsterStats();
         monster.SetActive(true);
-        timeRemaining = 30;
+        // timeRemaining = 30;
         gameState = GameState.Gameplay;
         uiController.SetActive(true);
+        player.GetComponent<Rigidbody>().isKinematic = false;
+        timeRemaining = gameDurationInSeconds;
     }
 
     public void GetMonsterVector3(Vector3 val)
@@ -182,5 +181,45 @@ public class GameManager : MonoBehaviour
         
         crosshair.GetComponent<Crosshair>().Rescan();
         gameState = GameState.PreGame;
+    }
+
+    public void GameOver(bool isWin)
+    {
+        if (isWin) 
+        {
+            int playerHp = player.GetComponent<Player>().GetHp();
+            int playerCurrentHp = player.GetComponent<Player>().GetCurrentHp();
+            string playerHpStat = "HP:" + playerCurrentHp + "/" + playerHp;
+            hpText.text = playerHpStat;
+            uiController.SetActive(false);
+            gameState = GameState.Postgame;
+            timeRemaining = gameDurationInSeconds;
+            TimeUIText();
+            // gameover.SetActive(true);
+            finalScore.text = "Score:" + player.GetComponent<Player>().score;
+        }
+        else
+        {
+            int playerHp = player.GetComponent<Player>().GetHp();
+            int playerCurrentHp = player.GetComponent<Player>().GetCurrentHp();
+            string playerHpStat = "HP:" + playerCurrentHp + "/" + playerHp;
+            hpText.text = playerHpStat;
+            uiController.SetActive(false);
+            gameState = GameState.Postgame;
+            timeRemaining = gameDurationInSeconds;
+            TimeUIText();
+            gameover.SetActive(true);
+            finalScore.text = "Score:" + player.GetComponent<Player>().score;
+        }
+
+        Debug.Log("GAME OVER");
+    }
+
+    void TimeUIText()
+    {
+        float min = Mathf.FloorToInt(timeRemaining / 60);
+        float sec = Mathf.FloorToInt(timeRemaining % 60);
+        outputText = "Time left: " + string.Format("{0:00}:{1:00}", min, sec);
+        timeTxt.text = outputText;
     }
 }
