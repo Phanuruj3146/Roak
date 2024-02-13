@@ -87,7 +87,7 @@ public class Monster : MonoBehaviour
 
         Vector3 direction = player.transform.position - transform.position;
         int randAttack = Random.Range(1, 10);
-        if (randAttack >= 3)
+        if (randAttack >= 5)
         {
             laserList[currentLaser].SetActive(true);
             laserList[currentLaser].transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
@@ -103,7 +103,7 @@ public class Monster : MonoBehaviour
         }
         else
         {
-            Debug.Log("bomb");
+            // Debug.Log("bomb");
             bombList[currentBomb].SetActive(true);
             bombList[currentBomb].transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
             // bombList[currentBomb].GetComponent<Rigidbody>().velocity = new Vector3(direction.x, direction.y, direction.z).normalized * 10;

@@ -6,6 +6,7 @@ public class Barrier : MonoBehaviour
 {
     public GameObject player;
     public GameObject parriedBomb;
+    public GameObject currParriedBomb;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +28,9 @@ public class Barrier : MonoBehaviour
         if (other.gameObject.tag == "Bomb")
         {
             Debug.Log("absorb bomb");
-            parriedBomb = Instantiate(parriedBomb);
-            parriedBomb.transform.position = this.transform.position;
-            parriedBomb.GetComponent<Rigidbody>().velocity = (this.transform.forward) * 10;
+            currParriedBomb = Instantiate(parriedBomb);
+            currParriedBomb.transform.position = this.transform.position;
+            currParriedBomb.GetComponent<Rigidbody>().velocity = (player.transform.up * -1f) * 10;
         }
     }
 }
