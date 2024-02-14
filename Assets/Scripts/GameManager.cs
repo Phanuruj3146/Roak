@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == GameState.Gameplay)
         {
+            uiController.SetActive(true);
             // Debug.Log(timeRemaining);
             player = GameObject.FindGameObjectWithTag("Player");
             monster = GameObject.FindGameObjectWithTag("Monster");
@@ -197,6 +198,7 @@ public class GameManager : MonoBehaviour
             TimeUIText();
             // gameover.SetActive(true);
             finalScore.text = "Score:" + player.GetComponent<Player>().score;
+            scoreTxt.text = "Score";
         }
         else
         {
@@ -210,6 +212,7 @@ public class GameManager : MonoBehaviour
             TimeUIText();
             gameover.SetActive(true);
             finalScore.text = "Score:" + player.GetComponent<Player>().score;
+            scoreTxt.text = "Score";
         }
 
         Debug.Log("GAME OVER");
