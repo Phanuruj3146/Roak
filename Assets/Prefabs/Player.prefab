@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0ad4a1c73b7f76c4e97345a864d5391e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.02
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ad4a1c73b7f76c4e97345a864d5391e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.02
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ad4a1c73b7f76c4e97345a864d5391e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.02
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ad4a1c73b7f76c4e97345a864d5391e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -161,5 +161,6 @@ MonoBehaviour:
   bulletList: []
   barrier: {fileID: 7430322104312302121, guid: fd5e3a02d7f3501408db47a6c21d8cdd, type: 3}
   score: 0
+  gameManager: {fileID: 0}
   directionValue: {x: 0, y: 0}
   updown: 0
