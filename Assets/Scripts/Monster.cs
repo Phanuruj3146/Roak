@@ -164,7 +164,7 @@ public class Monster : MonoBehaviour
     {
         int playerLV = player.GetComponent<Player>().lv;
         hp = 100 * playerLV;
-        atk = 20 * playerLV;
+        atk = 20 + playerLV;
         currHp = hp;
     }
 

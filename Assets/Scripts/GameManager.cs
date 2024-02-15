@@ -7,6 +7,7 @@ using Core;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.ARFoundation;
+using System.Threading;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,13 +43,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // float min = Mathf.FloorToInt(timeRemaining / 60);
-        // float sec = Mathf.FloorToInt(timeRemaining % 60);
-        // outputText = "Time left: " + string.Format("{0:00}:{1:00}", min, sec);
-        // timeTxt.text = outputText;
         timeRemaining = gameDurationInSeconds;
-        Debug.Log(timeRemaining);
-        // TimeUIText();
     }
 
     // Update is called once per frame
@@ -148,11 +143,12 @@ public class GameManager : MonoBehaviour
     {
         monster.GetComponent<Monster>().SetMonsterStats();
         monster.SetActive(true);
-        // timeRemaining = 30;
-        gameState = GameState.Gameplay;
         uiController.SetActive(true);
         player.GetComponent<Rigidbody>().isKinematic = false;
         timeRemaining = gameDurationInSeconds;
+        shopManager.SetActive(false);
+        gameState = GameState.Gameplay;
+        //StartCoroutine(ContinueDelay());
     }
 
     public void GetMonsterVector3(Vector3 val)
@@ -164,7 +160,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < maxBox; i++)
         {
             GameObject box = Instantiate(buffBox, new Vector3(Random.Range(posx-2,posx+4), Random.Range(posy, posy + 4), Random.Range(posz - 2, posz + 2)), Quaternion.identity);
-            //GameObject box = Instantiate(buffBox, new Vector3(Random.Range(posx - 2, posx + 4), posy, Random.Range(posz - 2, posz + 2)), Quaternion.identity);
             boxList.Add(box);
         }
     }
@@ -174,10 +169,26 @@ public class GameManager : MonoBehaviour
         uiController.SetActive(false);
         Destroy(monster);
         Destroy(player);
+        
         for (int i = 0; i < maxBox; i++)
         {
+            Debug.Log(boxList[i]);
             Destroy(boxList[i]);
         }
+        foreach (var laser in FindInActiveObjectsByTag("Laser"))
+        {
+            Destroy(laser);
+        }
+        foreach (var bomb in FindInActiveObjectsByTag("Bomb"))
+        {
+            Destroy(bomb);
+        }
+        foreach (var bullet in FindInActiveObjectsByTag("Bullets"))
+        {
+            Destroy(bullet);
+        }
+
+
         gameover.SetActive(false);
         
         crosshair.GetComponent<Crosshair>().Rescan();
@@ -225,4 +236,22 @@ public class GameManager : MonoBehaviour
         outputText = "Time left: " + string.Format("{0:00}:{1:00}", min, sec);
         timeTxt.text = outputText;
     }
+
+    GameObject[] FindInActiveObjectsByTag(string tag)
+    {
+        List<GameObject> validTransforms = new List<GameObject>();
+        Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if (objs[i].hideFlags == HideFlags.None)
+            {
+                if (objs[i].gameObject.CompareTag(tag))
+                {
+                    validTransforms.Add(objs[i].gameObject);
+                }
+            }
+        }
+        return validTransforms.ToArray();
+    }
+
 }

@@ -20,6 +20,7 @@ public class Crosshair : MonoBehaviour
     public GameObject updownJoystick;
     public GameObject parryBtn;
     public GameObject gameManager;
+    public GameObject atkBtn;
 
     private Pose placementPose;
     private bool monsterExist = false;
@@ -32,6 +33,7 @@ public class Crosshair : MonoBehaviour
         movementJoystick.SetActive(false);
         updownJoystick.SetActive(false);
         parryBtn.SetActive(false);
+        atkBtn.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,16 +42,6 @@ public class Crosshair : MonoBehaviour
         UpdatePlacementPose();
         UpdateTargetIndicator();
 
-        //if (canPlace && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        //{
-        //    if (monsterAlive == false)
-        //    {
-        //        InstantiateObject(monster);
-        //    } else if (playerAlive == false)
-        //    {
-        //        InstantiateObject(player);
-        //    }
-        //}
 
         if (canPlace && Input.GetKeyUp(KeyCode.Space))
         {
@@ -90,6 +82,7 @@ public class Crosshair : MonoBehaviour
             movementJoystick.SetActive(true);
             updownJoystick.SetActive(true);
             parryBtn.SetActive(true);
+            atkBtn.SetActive(true);
             gameManager.GetComponent<GameManager>().StartGame();
 
         }

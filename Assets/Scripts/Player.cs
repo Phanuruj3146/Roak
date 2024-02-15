@@ -104,21 +104,24 @@ public class Player : MonoBehaviour
 
     void Attack()
     {
-        StartCoroutine(ButtonDelayCoroutine());
-        if (currentBullet == maxBullet)
+        if (gameManager.GetComponent<GameManager>().GetGameState() == GameState.Gameplay)
         {
-            currentBullet = 0;
-        }
-        Vector3 currentPos = this.transform.position;
-        //currentPos.x += 0.1f;
-        //currentPos.y -= 0.8f;
+            StartCoroutine(ButtonDelayCoroutine());
+            if (currentBullet == maxBullet)
+            {
+                currentBullet = 0;
+            }
+            Vector3 currentPos = this.transform.position;
+            //currentPos.x += 0.1f;
+            //currentPos.y -= 0.8f;
 
-        bulletList[currentBullet].transform.position = this.transform.position;
-        bulletList[currentBullet].SetActive(true);
-        // bulletList[currentBullet].GetComponent<Rigidbody>().velocity = Vector3.zero;
-        bulletList[currentBullet].GetComponent<Rigidbody>().velocity = (transform.up * -1f) * 10;
-        //bulletList[currentBullet].transform.position = currentPos;
-        currentBullet++;
+            bulletList[currentBullet].transform.position = this.transform.position;
+            bulletList[currentBullet].SetActive(true);
+            // bulletList[currentBullet].GetComponent<Rigidbody>().velocity = Vector3.zero;
+            bulletList[currentBullet].GetComponent<Rigidbody>().velocity = (transform.up * -1f) * 10;
+            //bulletList[currentBullet].transform.position = currentPos;
+            currentBullet++;
+        }
     }
 
     void Parry()
