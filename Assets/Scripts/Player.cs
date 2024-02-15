@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     private int currentBullet = 0;
     //private int currentParriedBomb = 0;
 
+    [SerializeField] Healthbar _healthbar;
     [SerializeField] private Vector2 directionValue;
     [SerializeField] private float updown;
 

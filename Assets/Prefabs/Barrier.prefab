@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.986, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -122,3 +122,4 @@ MonoBehaviour:
   monster: {fileID: 5120353838322236121, guid: 37051660314e30e4bb516166f7f12e75, type: 3}
   parriedBomb: {fileID: 3874518140545689579, guid: 329d4205a589d93478db1274d55fa2f4, type: 3}
   currParriedBomb: {fileID: 0}
+  moveSpeed: 10

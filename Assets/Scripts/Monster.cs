@@ -128,7 +128,7 @@ public class Monster : MonoBehaviour
         }
         else
         {
-            currHp -= player.GetComponent<Player>().atk * 2;
+            currHp -= player.GetComponent<Player>().atk +20;
         }
 
         if (currHp <= 0 )
