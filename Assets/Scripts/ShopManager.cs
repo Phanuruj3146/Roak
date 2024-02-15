@@ -19,6 +19,7 @@ public class ShopManager : MonoBehaviour
     public int playerMoney;
     public GameObject gameManager;
     public GameState gameState;
+    public Button healBtn;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +77,16 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Upgrade SPD");
             player.GetComponent<Player>().UpgradeSPD();
             player.GetComponent<Player>().DecreaseMoney(10);
+        }
+    }
+
+    public void BuyHeal()
+    {
+        if (playerMoney >= 20)
+        {
+            player.GetComponent<Player>().Heal();
+            player.GetComponent<Player>().Heal();
+            player.GetComponent<Player>().DecreaseMoney(20);
         }
     }
 
