@@ -60,7 +60,7 @@ public class Crosshair : MonoBehaviour
     public void Rescan()
     {
         monsterTarget.SetActive(true);
-        playerTarget.SetActive(true);
+        
         monsterExist = false;
         playerExist = false;
         spawnBtnUI.gameObject.SetActive(true);
@@ -75,6 +75,7 @@ public class Crosshair : MonoBehaviour
             Instantiate(monster, placementPose.position, Quaternion.Euler(-90,0,0));
             type = "Monster";
             spawnBtnUIText.text = "Spawn Player";
+            playerTarget.SetActive(true);
             gameManager.GetComponent<GameManager>().GetMonsterVector3(placementPose.position);
 
         }

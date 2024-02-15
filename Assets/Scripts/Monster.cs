@@ -87,7 +87,7 @@ public class Monster : MonoBehaviour
 
         Vector3 direction = player.transform.position - transform.position;
         int randAttack = Random.Range(1, 10);
-        if (randAttack >= 10)
+        if (randAttack >= 3)
         {
             laserList[currentLaser].SetActive(true);
             laserList[currentLaser].transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z);
@@ -120,9 +120,17 @@ public class Monster : MonoBehaviour
         canAttack = true;
     }
 
-    public void DamageMonster()
-    {
-        currHp -= player.GetComponent<Player>().atk;
+    public void DamageMonster(bool isNormal)
+    {   
+        if (isNormal)
+        {
+            currHp -= player.GetComponent<Player>().atk;
+        }
+        else
+        {
+            currHp -= player.GetComponent<Player>().atk +20;
+        }
+
         if (currHp <= 0 )
         {
             Debug.Log("Monster Dead!");
@@ -130,6 +138,7 @@ public class Monster : MonoBehaviour
             player.GetComponent<Player>().IncreaseScore();
             player.GetComponent<Player>().IncreaseMoney(50);
             player.GetComponent<Player>().IncreaseLevel();
+            // gameManager.GetComponent<GameManager>().GameOver(true);
             gameManager.GetComponent<GameManager>().Shopping();
         }
     }

@@ -5,12 +5,15 @@ using UnityEngine;
 public class Barrier : MonoBehaviour
 {
     public GameObject player;
+    public GameObject monster;
     public GameObject parriedBomb;
     public GameObject currParriedBomb;
+    public float moveSpeed = 10f;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        monster = GameObject.FindGameObjectWithTag("Monster");
     }
 
     // Update is called once per frame
@@ -30,7 +33,7 @@ public class Barrier : MonoBehaviour
             Debug.Log("absorb bomb");
             currParriedBomb = Instantiate(parriedBomb);
             currParriedBomb.transform.position = this.transform.position;
-            currParriedBomb.GetComponent<Rigidbody>().velocity = (player.transform.up * -1f) * 10;
+            // currParriedBomb.GetComponent<Rigidbody>().velocity = (player.transform.up * -1f) * 10;
         }
     }
 }

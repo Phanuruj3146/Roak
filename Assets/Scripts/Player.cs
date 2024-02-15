@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     private int currentBullet = 0;
     //private int currentParriedBomb = 0;
 
+    [SerializeField] Healthbar _healthbar;
     [SerializeField] private Vector2 directionValue;
     [SerializeField] private float updown;
 
@@ -63,12 +64,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Debug.Log(score);
         gameManager = GameObject.FindGameObjectWithTag("GameController");
         if (gameManager.GetComponent<GameManager>().GetGameState() == GameState.Gameplay)
         {
             directionValue = actionMap.Player.Movement.ReadValue<Vector2>();
             updown = actionMap.Player.UpDown.ReadValue<float>();
-            Debug.Log(updown);
             isAttack = actionMap.Player.Attack.ReadValue<float>();
             isParry = actionMap.Player.Parry.ReadValue<float>();
         }
@@ -220,7 +221,7 @@ public class Player : MonoBehaviour
     private IEnumerator ParryDelayCoroutine()
     {
         // Wait for the delay (adjust the time accordingly)
-        yield return new WaitForSeconds(1f); // Adjust the delay time as needed
+        yield return new WaitForSeconds(0.5f); // Adjust the delay time as needed
         // Enable button press after the delay
         barrier.SetActive(false);
     }
