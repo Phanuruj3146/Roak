@@ -169,11 +169,10 @@ public class GameManager : MonoBehaviour
         uiController.SetActive(false);
         Destroy(monster);
         Destroy(player);
-        
-        for (int i = 0; i < maxBox; i++)
+
+        foreach (var box in FindInActiveObjectsByTag("buffBox"))
         {
-            Debug.Log(boxList[i]);
-            Destroy(boxList[i]);
+            Destroy(box);
         }
         foreach (var laser in FindInActiveObjectsByTag("Laser"))
         {
