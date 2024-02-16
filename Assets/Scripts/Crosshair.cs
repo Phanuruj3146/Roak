@@ -55,7 +55,9 @@ public class Crosshair : MonoBehaviour
         
         monsterExist = false;
         playerExist = false;
+        spawnBtnUIText.text = "Spawn Monster";
         spawnBtnUI.gameObject.SetActive(true);
+        
     }
 
     void InstantiateObject()
@@ -63,7 +65,6 @@ public class Crosshair : MonoBehaviour
         string type = "";
         if (monsterExist == false)
         {
-
             Instantiate(monster, placementPose.position, Quaternion.Euler(-90,0,0));
             type = "Monster";
             spawnBtnUIText.text = "Spawn Player";

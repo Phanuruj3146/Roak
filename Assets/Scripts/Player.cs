@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
     // [SerializeField] private float forcePower = 1f;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         currentHp = hp;
         actionMap = new CharInputSystem();
@@ -227,5 +227,10 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Adjust the delay time as needed
         // Enable button press after the delay
         barrier.SetActive(false);
+    }
+
+    public List<GameObject> GetPlayerBullets()
+    {
+        return bulletList;
     }
 }

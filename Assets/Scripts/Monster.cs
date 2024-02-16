@@ -24,7 +24,7 @@ public class Monster : MonoBehaviour
     private int currentLaser = 0;
     private int currentBomb = 0;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         canAttack = true;
         if (GameObject.FindGameObjectWithTag("GameController") != null)
@@ -171,5 +171,15 @@ public class Monster : MonoBehaviour
     public GameObject GetMonster()
     {
         return this.gameObject;
+    }
+
+    public List<GameObject> GetMonsterLasers()
+    {
+        return laserList;
+    }
+
+    public List<GameObject> GetMonsterBombs()
+    {
+        return bombList;
     }
 }

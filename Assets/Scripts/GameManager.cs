@@ -170,21 +170,25 @@ public class GameManager : MonoBehaviour
         Destroy(monster);
         Destroy(player);
 
-        foreach (var box in FindInActiveObjectsByTag("buffBox"))
+        foreach (var box in boxList)
         {
+            box.SetActive(true);
             Destroy(box);
         }
-        foreach (var laser in FindInActiveObjectsByTag("Laser"))
+        List<GameObject> bulletList = player.GetComponent<Player>().GetPlayerBullets();
+        List<GameObject> laserList = monster.GetComponent<Monster>().GetMonsterLasers();
+        List<GameObject> bombList = monster.GetComponent<Monster>().GetMonsterBombs();
+        foreach (var bullet in bulletList)
+        {
+            Destroy(bullet);
+        }
+        foreach (var laser in laserList)
         {
             Destroy(laser);
         }
-        foreach (var bomb in FindInActiveObjectsByTag("Bomb"))
+        foreach (var bomb in bombList)
         {
             Destroy(bomb);
-        }
-        foreach (var bullet in FindInActiveObjectsByTag("Bullets"))
-        {
-            Destroy(bullet);
         }
 
 
@@ -209,6 +213,7 @@ public class GameManager : MonoBehaviour
             // gameover.SetActive(true);
             finalScore.text = "Score:" + player.GetComponent<Player>().score;
             scoreTxt.text = "Score";
+
         }
         else
         {
